@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fibroid &amp; AUB Study — Research Questionnaire</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F3EE;--surface:#FFFFFF;--surface2:#F0EDE6;
+  --border:#DDD9D0;--border2:#C8C4BB;
+  --text:#1A1814;--text2:#6B6760;--text3:#9B9890;
+  --accent:#2B5C8A;--accent-l:#E8F0F8;--accent-t:#1A3F61;
+  --danger:#8A2B2B;--danger-l:#F8E8E8;
+  --success:#2B6B3F;--success-l:#E8F5EE;
+  --warning:#7A5C1E;--warning-l:#FBF3E3;
+  --r:8px;--rl:14px;
+  --sans:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.logo-mark svg{width:18px;height:18px}
+.logo-text{font-size:14px;font-weight:600;letter-spacing:-0.02em}
+.logo-sub{font-size:11px;color:var(--text2)}
+.hdr-right{display:flex;align-items:center;gap:8px}
+.hdr-badge{font-family:var(--mono);font-size:11px;background:var(--accent-l);color:var(--accent-t);padding:4px 10px;border-radius:20px;border:1px solid #C5D8EE}
+.sync-dot{width:8px;height:8px;border-radius:50%;background:var(--text3);display:inline-block;margin-right:4px}
+.sync-dot.ok{background:#2B6B3F}.sync-dot.err{background:var(--danger)}.sync-dot.spin{background:var(--warning);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.tabs{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;overflow-x:auto}
+.tab{padding:12px 20px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;font-family:var(--sans);display:flex;align-items:center;gap:6px;transition:all .15s;white-space:nowrap}
+.tab:hover{color:var(--text)}.tab.on{color:var(--accent);border-bottom-color:var(--accent)}
+.tc{background:var(--surface2);color:var(--text2);font-size:10px;font-family:var(--mono);padding:1px 6px;border-radius:10px;min-width:20px;text-align:center}
+.tab.on .tc{background:var(--accent-l);color:var(--accent-t)}
+
+main{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
+.page{display:none}.page.on{display:block}
+
+/* SECTION HEADER */
+.sec-header{background:var(--accent);color:#fff;border-radius:var(--rl) var(--rl) 0 0;padding:12px 18px;font-size:13px;font-weight:600;letter-spacing:.02em;margin-top:1.5rem}
+.sec-header:first-of-type{margin-top:0}
+.sec-note{background:var(--accent-l);color:var(--accent-t);font-size:12px;padding:8px 18px;border-left:3px solid var(--accent);margin-bottom:0}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:1.25rem 1.5rem;margin-bottom:0}
+.card-joined{border-radius:0;border-top:none}
+.card-bottom{border-radius:0 0 var(--rl) var(--rl);border-top:none;margin-bottom:1.5rem}
+
+/* FORM META */
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:1rem}
+
+/* QUESTION ROW */
+.qrow{display:flex;gap:16px;padding:10px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.qrow:last-child{border-bottom:none}
+.qno{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--accent);min-width:32px;padding-top:2px}
+.qlabel{font-size:13px;color:var(--text);flex:1;line-height:1.5}
+.qinput{min-width:180px;max-width:320px}
+
+/* INPUTS */
+.fg{display:flex;flex-direction:column;gap:4px}
+.fg label{font-size:12px;font-weight:500;color:var(--text2)}
+.fg input,.fg select,.fg textarea{font-family:var(--sans);font-size:13px;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:7px 10px;outline:none;transition:border-color .15s;width:100%}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--accent);background:var(--surface)}
+.fg select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B6760' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px}
+.req{color:var(--danger)}
+.num-input{width:90px}
+.short-input{width:140px}
+
+/* RADIO / CHECKBOX GROUP */
+.opts{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.opt-btn{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border:1px solid var(--border);border-radius:20px;font-size:12px;cursor:pointer;background:var(--surface);color:var(--text2);transition:all .15s;user-select:none}
+.opt-btn:hover{border-color:var(--accent);color:var(--accent)}
+.opt-btn.sel{background:var(--accent-l);border-color:var(--accent);color:var(--accent-t);font-weight:500}
+.opt-btn input{display:none}
+
+/* FIBROID ROWS */
+.fib-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.fib-table th{background:var(--accent-l);color:var(--accent-t);font-weight:600;font-size:11px;padding:7px 8px;border:1px solid var(--border);text-align:left;white-space:nowrap}
+.fib-table td{padding:6px 8px;border:1px solid var(--border);vertical-align:top}
+.fib-table .fib-no{font-family:var(--mono);font-weight:500;color:var(--accent);text-align:center;font-size:13px}
+.fib-input{width:100%;font-family:var(--sans);font-size:12px;border:1px solid var(--border);border-radius:5px;padding:4px 6px;background:var(--bg);color:var(--text);outline:none}
+.fib-input:focus{border-color:var(--accent);background:var(--surface)}
+.fib-select{width:100%;font-family:var(--sans);font-size:11px;border:1px solid var(--border);border-radius:5px;padding:4px 5px;background:var(--bg);color:var(--text);outline:none;appearance:none}
+
+/* BUTTONS */
+.btn{font-family:var(--sans);font-size:13px;font-weight:500;padding:9px 18px;border-radius:var(--r);cursor:pointer;border:1px solid var(--border2);background:var(--surface);color:var(--text);display:inline-flex;align-items:center;gap:6px;transition:all .15s}
+.btn:hover{background:var(--surface2)}.btn:active{transform:scale(.98)}.btn:disabled{opacity:.5;cursor:not-allowed}
+.btnp{background:var(--accent);color:#fff;border-color:var(--accent)}.btnp:hover{background:var(--accent-t)}
+.btnd{color:var(--danger);border-color:#E8C8C8}.btnd:hover{background:var(--danger-l)}
+.brow{display:flex;gap:8px;flex-wrap:wrap;margin-top:1.25rem}
+
+/* FLASH */
+.flash{font-size:12px;margin-top:8px;padding:8px 12px;border-radius:var(--r);display:none}
+.flash.ok{background:var(--success-l);color:var(--success);display:block}
+.flash.err{background:var(--danger-l);color:var(--danger);display:block}
+.flash.warn{background:var(--warning-l);color:var(--warning);display:block}
+
+/* RECORDS */
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:1.25rem}
+.scard{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:14px 16px}
+.slb{font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.sv{font-family:var(--mono);font-size:24px;font-weight:500;line-height:1.1}
+.sv.ac{color:var(--accent)}
+.rwrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--border)}
+table.rt{width:100%;border-collapse:collapse;font-size:12px;min-width:900px}
+table.rt thead th{background:var(--surface2);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text2);padding:9px 10px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+table.rt td{padding:9px 10px;border-bottom:1px solid var(--border);font-size:12px;vertical-align:middle}
+table.rt tbody tr:last-child td{border-bottom:none}
+table.rt tbody tr:hover td{background:var(--bg)}
+.mc{font-family:var(--mono)}
+.empty{text-align:center;padding:3rem 1rem;color:var(--text3)}
+.empty p{font-size:13px}
+
+.offline-banner{background:var(--warning-l);border:1px solid #E8D8A0;border-radius:var(--r);padding:10px 14px;font-size:12px;color:var(--warning);margin-bottom:1rem;display:none;align-items:center;gap:8px}
+.offline-banner.show{display:flex}
+
+@media(max-width:600px){
+  header{padding:0 1rem}main{padding:1rem}.tabs{padding:0 1rem}
+  .hdr-badge{display:none}.qrow{flex-direction:column;gap:6px}.qinput{min-width:100%;max-width:100%}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M9 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2h-4"/><path d="M9 3a2 2 0 004 0"/><path d="M9 12h6M9 16h4"/></svg>
+    </div>
+    <div>
+      <div class="logo-text">Fibroid &amp; AUB Study</div>
+      <div class="logo-sub">Research Questionnaire — Ibadan</div>
+    </div>
+  </div>
+  <div class="hdr-right">
+    <span style="font-size:12px;color:var(--text2);display:flex;align-items:center">
+      <span class="sync-dot" id="syncDot"></span>
+      <span id="syncLabel">Connecting...</span>
+    </span>
+    <span class="hdr-badge" id="hdrCount">0 / 150 cases</span>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab on" onclick="showPage('form',this)">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    New questionnaire
+  </button>
+  <button class="tab" onclick="showPage('records',this)">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+    All records <span class="tc" id="tabCount">0</span>
+  </button>
+</nav>
+
+<main>
+
+<!-- ══ FORM PAGE ══ -->
+<div class="page on" id="page-form">
+
+  <div class="offline-banner" id="offlineBanner">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+    No internet connection. Record will be saved locally and synced to the central database when connection is restored.
+  </div>
+
+  <!-- META -->
+  <div class="sec-header">Study Information</div>
+  <div class="card card-bottom">
+    <div class="meta-grid">
+      <div class="fg"><label>Participant Code / Patient ID <span class="req">*</span></label><input type="text" id="m-pid" placeholder="e.g. MSH/2025/001"></div>
+      <div class="fg"><label>Study centre <span class="req">*</span></label>
+        <select id="m-centre">
+          <option value="">— select —</option>
+          <option>Molly Specialist Hospital</option>
+          <option>Total Health Diagnostic Center</option>
+          <option>Beaconhealth Diagnostic Center</option>
+        </select>
+      </div>
+      <div class="fg"><label>Date of scan</label><input type="date" id="m-date"></div>
+      <div class="fg"><label>Sonographer</label><input type="text" id="m-sono" placeholder="Name"></div>
+    </div>
+  </div>
+
+  <!-- SECTION A -->
+  <div class="sec-header">Section A — Sociodemographic Characteristics <span style="font-weight:300;font-size:12px">(Participant-completed)</span></div>
+  <div class="card card-bottom">
+
+    <div class="qrow">
+      <div class="qno">A1</div>
+      <div class="qlabel">What is your age (in completed years)?</div>
+      <div class="qinput"><input type="number" class="num-input" id="a1" min="10" max="80" placeholder="years"></div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">A2</div>
+      <div class="qlabel">What is your ethnic group?</div>
+      <div class="qinput">
+        <div class="opts" id="a2">
+          <label class="opt-btn"><input type="radio" name="a2" value="Yoruba">Yoruba</label>
+          <label class="opt-btn"><input type="radio" name="a2" value="Igbo">Igbo</label>
+          <label class="opt-btn"><input type="radio" name="a2" value="Hausa/Fulani">Hausa/Fulani</label>
+          <label class="opt-btn"><input type="radio" name="a2" value="Ijaw">Ijaw</label>
+          <label class="opt-btn"><input type="radio" name="a2" value="Other">Other</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">A3</div>
+      <div class="qlabel">What is your religion?</div>
+      <div class="qinput">
+        <div class="opts" id="a3">
+          <label class="opt-btn"><input type="radio" name="a3" value="Christianity">Christianity</label>
+          <label class="opt-btn"><input type="radio" name="a3" value="Islam">Islam</label>
+          <label class="opt-btn"><input type="radio" name="a3" value="Traditional">Traditional</label>
+          <label class="opt-btn"><input type="radio" name="a3" value="Other">Other</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">A4</div>
+      <div class="qlabel">What is your highest level of education?</div>
+      <div class="qinput">
+        <div class="opts" id="a4">
+          <label class="opt-btn"><input type="radio" name="a4" value="No formal education">No formal education</label>
+          <label class="opt-btn"><input type="radio" name="a4" value="Primary">Primary</label>
+          <label class="opt-btn"><input type="radio" name="a4" value="Secondary">Secondary</label>
+          <label class="opt-btn"><input type="radio" name="a4" value="OND/NCE">OND/NCE</label>
+          <label class="opt-btn"><input type="radio" name="a4" value="Bachelor's/HND">Bachelor's/HND</label>
+          <label class="opt-btn"><input type="radio" name="a4" value="Postgraduate">Postgraduate</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">A5</div>
+      <div class="qlabel">What is your current occupation?</div>
+      <div class="qinput">
+        <div class="opts" id="a5">
+          <label class="opt-btn"><input type="radio" name="a5" value="Unemployed">Unemployed</label>
+          <label class="opt-btn"><input type="radio" name="a5" value="Student">Student</label>
+          <label class="opt-btn"><input type="radio" name="a5" value="Trader/Artisan">Trader/Artisan</label>
+          <label class="opt-btn"><input type="radio" name="a5" value="Civil Servant">Civil Servant</label>
+          <label class="opt-btn"><input type="radio" name="a5" value="Health Worker">Health Worker</label>
+          <label class="opt-btn"><input type="radio" name="a5" value="Other">Other</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">A6</div>
+      <div class="qlabel">What is your marital status?</div>
+      <div class="qinput">
+        <div class="opts" id="a6">
+          <label class="opt-btn"><input type="radio" name="a6" value="Single">Single</label>
+          <label class="opt-btn"><input type="radio" name="a6" value="Married">Married</label>
+          <label class="opt-btn"><input type="radio" name="a6" value="Widowed">Widowed</label>
+          <label class="opt-btn"><input type="radio" name="a6" value="Divorced/Separated">Divorced/Separated</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">A7</div>
+      <div class="qlabel">What is your BMI category? (if known)</div>
+      <div class="qinput">
+        <div class="opts" id="a7">
+          <label class="opt-btn"><input type="radio" name="a7" value="Underweight (<18.5)">Underweight (&lt;18.5)</label>
+          <label class="opt-btn"><input type="radio" name="a7" value="Normal (18.5–24.9)">Normal (18.5–24.9)</label>
+          <label class="opt-btn"><input type="radio" name="a7" value="Overweight (25–29.9)">Overweight (25–29.9)</label>
+          <label class="opt-btn"><input type="radio" name="a7" value="Obese (≥30)">Obese (≥30)</label>
+          <label class="opt-btn"><input type="radio" name="a7" value="Not known">Not known</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION B -->
+  <div class="sec-header">Section B — Menstrual &amp; Reproductive History <span style="font-weight:300;font-size:12px">(Participant-completed)</span></div>
+  <div class="card card-bottom">
+
+    <div class="qrow">
+      <div class="qno">B1</div>
+      <div class="qlabel">At what age did you have your first menstrual period (menarche)?</div>
+      <div class="qinput"><input type="number" class="num-input" id="b1" min="8" max="20" placeholder="years"></div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">B2</div>
+      <div class="qlabel">How many days does your menstrual cycle typically last?</div>
+      <div class="qinput">
+        <input type="number" class="num-input" id="b2-days" min="14" max="90" placeholder="days">
+        <label class="opt-btn" style="margin-top:6px" id="b2-irreg-btn"><input type="checkbox" id="b2-irreg" onchange="toggleIrreg()"> Irregular / Not sure</label>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">B3</div>
+      <div class="qlabel">How many days does your actual bleeding (period) last?</div>
+      <div class="qinput"><input type="number" class="num-input" id="b3" min="1" max="20" placeholder="days"></div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">B4</div>
+      <div class="qlabel">How many pregnancies have you had (including miscarriages and stillbirths)?</div>
+      <div class="qinput">
+        <input type="number" class="num-input" id="b4" min="0" max="20" placeholder="number">
+        <div style="font-size:11px;color:var(--text3);margin-top:2px">Enter 0 if none</div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">B5</div>
+      <div class="qlabel">How many live births have you had?</div>
+      <div class="qinput">
+        <input type="number" class="num-input" id="b5" min="0" max="20" placeholder="number">
+        <div style="font-size:11px;color:var(--text3);margin-top:2px">Enter 0 if nulliparous</div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">B6</div>
+      <div class="qlabel">Are you currently using any form of contraception?</div>
+      <div class="qinput">
+        <div class="opts" id="b6">
+          <label class="opt-btn"><input type="radio" name="b6" value="No">No</label>
+          <label class="opt-btn"><input type="radio" name="b6" value="Oral pills">Oral pills</label>
+          <label class="opt-btn"><input type="radio" name="b6" value="Injectable">Injectable</label>
+          <label class="opt-btn"><input type="radio" name="b6" value="IUCD">IUCD</label>
+          <label class="opt-btn"><input type="radio" name="b6" value="Implant">Implant</label>
+          <label class="opt-btn"><input type="radio" name="b6" value="Barrier">Barrier</label>
+          <label class="opt-btn"><input type="radio" name="b6" value="Other">Other</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">B7</div>
+      <div class="qlabel">Do you have a family history of uterine fibroids (mother, sister, or aunt)?</div>
+      <div class="qinput">
+        <div class="opts" id="b7">
+          <label class="opt-btn"><input type="radio" name="b7" value="Yes">Yes</label>
+          <label class="opt-btn"><input type="radio" name="b7" value="No">No</label>
+          <label class="opt-btn"><input type="radio" name="b7" value="Don't know">Don't know</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">B8</div>
+      <div class="qlabel">Have you ever been told you have uterine fibroids before?</div>
+      <div class="qinput">
+        <div class="opts" id="b8">
+          <label class="opt-btn"><input type="radio" name="b8" value="Yes">Yes</label>
+          <label class="opt-btn"><input type="radio" name="b8" value="No">No</label>
+          <label class="opt-btn"><input type="radio" name="b8" value="Not sure">Not sure</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">B9</div>
+      <div class="qlabel">Have you ever had any uterine surgery (myomectomy, D&amp;C, caesarean section)?</div>
+      <div class="qinput">
+        <div class="opts" id="b9">
+          <label class="opt-btn"><input type="radio" name="b9" value="Yes">Yes</label>
+          <label class="opt-btn"><input type="radio" name="b9" value="No">No</label>
+        </div>
+        <input type="text" id="b9-spec" placeholder="If yes, specify..." style="margin-top:6px;font-size:12px;width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:var(--r);background:var(--bg);color:var(--text);outline:none">
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">B10</div>
+      <div class="qlabel">Are you currently pregnant or might you be pregnant?</div>
+      <div class="qinput">
+        <div class="opts" id="b10">
+          <label class="opt-btn"><input type="radio" name="b10" value="Yes">Yes</label>
+          <label class="opt-btn"><input type="radio" name="b10" value="No">No</label>
+          <label class="opt-btn"><input type="radio" name="b10" value="Not sure">Not sure</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION C -->
+  <div class="sec-header">Section C — AUB Symptom Characterisation <span style="font-weight:300;font-size:12px">(Participant-completed)</span></div>
+  <div class="card card-bottom">
+
+    <div class="qrow">
+      <div class="qno">C1</div>
+      <div class="qlabel">Which of the following best describes your main bleeding concern?</div>
+      <div class="qinput">
+        <div class="opts" id="c1">
+          <label class="opt-btn"><input type="radio" name="c1" value="Bleeding too heavy">Bleeding too heavy</label>
+          <label class="opt-btn"><input type="radio" name="c1" value="Bleeding lasts too long">Lasts too long</label>
+          <label class="opt-btn"><input type="radio" name="c1" value="Bleeding at irregular times">Irregular times</label>
+          <label class="opt-btn"><input type="radio" name="c1" value="Bleeding between periods">Between periods</label>
+          <label class="opt-btn"><input type="radio" name="c1" value="Bleeding after sex">After sex</label>
+          <label class="opt-btn"><input type="radio" name="c1" value="More than one of the above">More than one</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">C2</div>
+      <div class="qlabel">How many fully soaked pads/tampons do you use per day on your heaviest day?</div>
+      <div class="qinput"><input type="number" class="num-input" id="c2" min="0" max="30" placeholder="number"></div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">C3</div>
+      <div class="qlabel">Do you pass blood clots during your period?</div>
+      <div class="qinput">
+        <div class="opts" id="c3">
+          <label class="opt-btn"><input type="radio" name="c3" value="Never">Never</label>
+          <label class="opt-btn"><input type="radio" name="c3" value="Sometimes">Sometimes</label>
+          <label class="opt-btn"><input type="radio" name="c3" value="Most periods">Most periods</label>
+          <label class="opt-btn"><input type="radio" name="c3" value="Every period">Every period</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">C4</div>
+      <div class="qlabel">If you pass clots, approximately how large are they?</div>
+      <div class="qinput">
+        <div class="opts" id="c4">
+          <label class="opt-btn"><input type="radio" name="c4" value="Small (pea-sized or less)">Small (pea-sized)</label>
+          <label class="opt-btn"><input type="radio" name="c4" value="Medium (coin-sized)">Medium (coin-sized)</label>
+          <label class="opt-btn"><input type="radio" name="c4" value="Large (golf-ball-sized or more)">Large (golf-ball or more)</label>
+          <label class="opt-btn"><input type="radio" name="c4" value="N/A">N/A</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">C5</div>
+      <div class="qlabel">Do you experience flooding (sudden heavy gushing that soaks through clothing or bedding)?</div>
+      <div class="qinput">
+        <div class="opts" id="c5">
+          <label class="opt-btn"><input type="radio" name="c5" value="Never">Never</label>
+          <label class="opt-btn"><input type="radio" name="c5" value="Sometimes">Sometimes</label>
+          <label class="opt-btn"><input type="radio" name="c5" value="Most periods">Most periods</label>
+          <label class="opt-btn"><input type="radio" name="c5" value="Every period">Every period</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">C6</div>
+      <div class="qlabel">How long has abnormal bleeding been present?</div>
+      <div class="qinput">
+        <div class="opts" id="c6">
+          <label class="opt-btn"><input type="radio" name="c6" value="<3 months">&lt;3 months</label>
+          <label class="opt-btn"><input type="radio" name="c6" value="3–6 months">3–6 months</label>
+          <label class="opt-btn"><input type="radio" name="c6" value="6–12 months">6–12 months</label>
+          <label class="opt-btn"><input type="radio" name="c6" value="1–3 years">1–3 years</label>
+          <label class="opt-btn"><input type="radio" name="c6" value=">3 years">&gt;3 years</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">C7</div>
+      <div class="qlabel">On a scale of 1–5, how much does the bleeding affect your daily activities? (1 = Not at all, 5 = Severely)</div>
+      <div class="qinput">
+        <div class="opts" id="c7">
+          <label class="opt-btn"><input type="radio" name="c7" value="1">1</label>
+          <label class="opt-btn"><input type="radio" name="c7" value="2">2</label>
+          <label class="opt-btn"><input type="radio" name="c7" value="3">3</label>
+          <label class="opt-btn"><input type="radio" name="c7" value="4">4</label>
+          <label class="opt-btn"><input type="radio" name="c7" value="5">5</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">C8</div>
+      <div class="qlabel">Do you experience pain during your period (dysmenorrhoea)?</div>
+      <div class="qinput">
+        <div class="opts" id="c8">
+          <label class="opt-btn"><input type="radio" name="c8" value="No pain">No pain</label>
+          <label class="opt-btn"><input type="radio" name="c8" value="Mild">Mild</label>
+          <label class="opt-btn"><input type="radio" name="c8" value="Moderate">Moderate</label>
+          <label class="opt-btn"><input type="radio" name="c8" value="Severe, requiring medication">Severe (needs meds)</label>
+          <label class="opt-btn"><input type="radio" name="c8" value="Severe, disabling">Severe (disabling)</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">C9</div>
+      <div class="qlabel">Do you experience pelvic pressure, heaviness, or urinary frequency between periods?</div>
+      <div class="qinput">
+        <div class="opts" id="c9">
+          <label class="opt-btn"><input type="radio" name="c9" value="No">No</label>
+          <label class="opt-btn"><input type="radio" name="c9" value="Pelvic pressure/heaviness">Pelvic pressure/heaviness</label>
+          <label class="opt-btn"><input type="radio" name="c9" value="Urinary frequency">Urinary frequency</label>
+          <label class="opt-btn"><input type="radio" name="c9" value="Both">Both</label>
+          <label class="opt-btn"><input type="radio" name="c9" value="Other">Other</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">C10</div>
+      <div class="qlabel">Have you been diagnosed with or treated for anaemia related to your bleeding?</div>
+      <div class="qinput">
+        <div class="opts" id="c10">
+          <label class="opt-btn"><input type="radio" name="c10" value="Yes, currently on treatment">Yes, on treatment</label>
+          <label class="opt-btn"><input type="radio" name="c10" value="Yes, previously treated">Yes, previously</label>
+          <label class="opt-btn"><input type="radio" name="c10" value="Suspected but not confirmed">Suspected, unconfirmed</label>
+          <label class="opt-btn"><input type="radio" name="c10" value="No">No</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">C11</div>
+      <div class="qlabel">Have you previously received any treatment for this bleeding problem?</div>
+      <div class="qinput">
+        <div class="opts" id="c11">
+          <label class="opt-btn"><input type="radio" name="c11" value="No treatment">No treatment</label>
+          <label class="opt-btn"><input type="radio" name="c11" value="Medications">Medications</label>
+          <label class="opt-btn"><input type="radio" name="c11" value="Surgery: Myomectomy">Myomectomy</label>
+          <label class="opt-btn"><input type="radio" name="c11" value="Surgery: Hysterectomy">Hysterectomy</label>
+          <label class="opt-btn"><input type="radio" name="c11" value="Other">Other</label>
+        </div>
+        <input type="text" id="c11-spec" placeholder="If medications, specify..." style="margin-top:6px;font-size:12px;width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:var(--r);background:var(--bg);color:var(--text);outline:none">
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION D -->
+  <div class="sec-header">Section D — Sonographic Findings <span style="font-weight:300;font-size:12px">(Sonographer-completed)</span></div>
+  <div class="sec-note">This section is to be completed by the sonographer only after performing the ultrasound examination.</div>
+  <div class="card card-bottom">
+
+    <div class="qrow">
+      <div class="qno">D1</div>
+      <div class="qlabel">Examination type used</div>
+      <div class="qinput">
+        <div class="opts" id="d1">
+          <label class="opt-btn"><input type="radio" name="d1" value="TAS only">TAS only</label>
+          <label class="opt-btn"><input type="radio" name="d1" value="TVS only">TVS only</label>
+          <label class="opt-btn"><input type="radio" name="d1" value="TAS + TVS">TAS + TVS</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">D2</div>
+      <div class="qlabel">Uterine position</div>
+      <div class="qinput">
+        <div class="opts" id="d2">
+          <label class="opt-btn"><input type="radio" name="d2" value="Anteverted/Anteflexed">Anteverted/Anteflexed</label>
+          <label class="opt-btn"><input type="radio" name="d2" value="Retroverted/Retroflexed">Retroverted/Retroflexed</label>
+          <label class="opt-btn"><input type="radio" name="d2" value="Axial">Axial</label>
+          <label class="opt-btn"><input type="radio" name="d2" value="Other">Other</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">D3</div>
+      <div class="qlabel">Uterine size (L × W × AP)</div>
+      <div class="qinput" style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        <input type="number" step="0.1" id="d3-l" placeholder="L" style="width:64px;padding:6px 8px;border:1px solid var(--border);border-radius:var(--r);font-size:12px;background:var(--bg)">
+        <span style="font-size:12px;color:var(--text2)">×</span>
+        <input type="number" step="0.1" id="d3-w" placeholder="W" style="width:64px;padding:6px 8px;border:1px solid var(--border);border-radius:var(--r);font-size:12px;background:var(--bg)">
+        <span style="font-size:12px;color:var(--text2)">×</span>
+        <input type="number" step="0.1" id="d3-ap" placeholder="AP" style="width:64px;padding:6px 8px;border:1px solid var(--border);border-radius:var(--r);font-size:12px;background:var(--bg)" oninput="calcVolume()">
+        <span style="font-size:12px;color:var(--text2)">cm</span>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">D4</div>
+      <div class="qlabel">Uterine volume (auto-calculated: 0.523 × L × W × AP)</div>
+      <div class="qinput">
+        <input type="text" id="d4-vol" placeholder="mL" readonly style="width:100px;padding:6px 8px;border:1px solid var(--border);border-radius:var(--r);font-size:12px;background:var(--surface2);color:var(--accent-t);font-family:var(--mono)">
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">D5</div>
+      <div class="qlabel">Myometrial echotexture</div>
+      <div class="qinput">
+        <div class="opts" id="d5">
+          <label class="opt-btn"><input type="radio" name="d5" value="Homogeneous">Homogeneous</label>
+          <label class="opt-btn"><input type="radio" name="d5" value="Heterogeneous">Heterogeneous</label>
+          <label class="opt-btn"><input type="radio" name="d5" value="Lobulated contour">Lobulated contour</label>
+          <label class="opt-btn"><input type="radio" name="d5" value="Bulky">Bulky</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">D6</div>
+      <div class="qlabel">Endometrial thickness (AP)</div>
+      <div class="qinput"><input type="number" step="0.1" class="num-input" id="d6" placeholder="mm"></div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">D7</div>
+      <div class="qlabel">Endometrial appearance</div>
+      <div class="qinput">
+        <div class="opts" id="d7">
+          <label class="opt-btn"><input type="radio" name="d7" value="Normal">Normal</label>
+          <label class="opt-btn"><input type="radio" name="d7" value="Thickened">Thickened</label>
+          <label class="opt-btn"><input type="radio" name="d7" value="Distorted/Compressed">Distorted/Compressed</label>
+          <label class="opt-btn"><input type="radio" name="d7" value="Displaced">Displaced</label>
+          <label class="opt-btn"><input type="radio" name="d7" value="Other">Other</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">D8</div>
+      <div class="qlabel">Fibroids detected?</div>
+      <div class="qinput">
+        <div class="opts" id="d8">
+          <label class="opt-btn"><input type="radio" name="d8" value="Yes" onchange="toggleFibroids('Yes')">Yes</label>
+          <label class="opt-btn"><input type="radio" name="d8" value="No" onchange="toggleFibroids('No')">No</label>
+        </div>
+      </div>
+    </div>
+
+    <div id="fibroid-section">
+      <div class="qrow">
+        <div class="qno">D9</div>
+        <div class="qlabel">Total number of fibroids</div>
+        <div class="qinput">
+          <div class="opts" id="d9">
+            <label class="opt-btn"><input type="radio" name="d9" value="Single">Single</label>
+            <label class="opt-btn"><input type="radio" name="d9" value="2–3">2–3</label>
+            <label class="opt-btn"><input type="radio" name="d9" value="4–5">4–5</label>
+            <label class="opt-btn"><input type="radio" name="d9" value=">5 (multiple)">&gt;5 (multiple)</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="qrow" style="flex-direction:column;gap:8px">
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div class="qno">D10</div>
+          <div class="qlabel" style="font-weight:500">Individual fibroid characterisation (up to 5 fibroids)</div>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="fib-table">
+            <thead>
+              <tr>
+                <th style="min-width:40px">No.</th>
+                <th style="min-width:130px">Size L×W×AP (cm)</th>
+                <th style="min-width:100px">FIGO type</th>
+                <th style="min-width:110px">Location</th>
+                <th style="min-width:110px">Echogenicity</th>
+                <th style="min-width:130px">Degenerative change</th>
+                <th style="min-width:110px">Doppler vascularity</th>
+              </tr>
+            </thead>
+            <tbody id="fibBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="qrow">
+        <div class="qno">D11</div>
+        <div class="qlabel">Posterior acoustic shadowing</div>
+        <div class="qinput">
+          <div class="opts" id="d11">
+            <label class="opt-btn"><input type="radio" name="d11" value="Present">Present</label>
+            <label class="opt-btn"><input type="radio" name="d11" value="Absent">Absent</label>
+            <label class="opt-btn"><input type="radio" name="d11" value="Partial">Partial</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="qrow">
+        <div class="qno">D12</div>
+        <div class="qlabel">Edge shadowing</div>
+        <div class="qinput">
+          <div class="opts" id="d12">
+            <label class="opt-btn"><input type="radio" name="d12" value="Present">Present</label>
+            <label class="opt-btn"><input type="radio" name="d12" value="Absent">Absent</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="qrow">
+        <div class="qno">D13</div>
+        <div class="qlabel">Largest single fibroid maximum diameter</div>
+        <div class="qinput"><input type="number" step="0.1" class="num-input" id="d13" placeholder="cm"></div>
+      </div>
+
+      <div class="qrow">
+        <div class="qno">D14</div>
+        <div class="qlabel">Dominant fibroid location</div>
+        <div class="qinput">
+          <div class="opts" id="d14">
+            <label class="opt-btn"><input type="radio" name="d14" value="Submucosal (Types 0–2)">Submucosal (0–2)</label>
+            <label class="opt-btn"><input type="radio" name="d14" value="Intramural (Types 3–4)">Intramural (3–4)</label>
+            <label class="opt-btn"><input type="radio" name="d14" value="Subserosal (Types 5–7)">Subserosal (5–7)</label>
+            <label class="opt-btn"><input type="radio" name="d14" value="Cervical (Type 8)">Cervical (8)</label>
+            <label class="opt-btn"><input type="radio" name="d14" value="Mixed">Mixed</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">D15</div>
+      <div class="qlabel">Adnexal findings</div>
+      <div class="qinput">
+        <div class="opts" id="d15">
+          <label class="opt-btn"><input type="radio" name="d15" value="Normal">Normal</label>
+          <label class="opt-btn"><input type="radio" name="d15" value="Ovarian cyst">Ovarian cyst</label>
+          <label class="opt-btn"><input type="radio" name="d15" value="Other">Other</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">D16</div>
+      <div class="qlabel">Cervical findings</div>
+      <div class="qinput">
+        <div class="opts" id="d16">
+          <label class="opt-btn"><input type="radio" name="d16" value="Normal">Normal</label>
+          <label class="opt-btn"><input type="radio" name="d16" value="Nabothian cysts">Nabothian cysts</label>
+          <label class="opt-btn"><input type="radio" name="d16" value="Fibroid">Fibroid</label>
+          <label class="opt-btn"><input type="radio" name="d16" value="Other">Other</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">D17</div>
+      <div class="qlabel">Uterine artery RI (if assessed)</div>
+      <div class="qinput" style="display:flex;gap:10px;flex-wrap:wrap">
+        <div class="fg" style="width:100px"><label>Right</label><input type="number" step="0.01" id="d17-r" placeholder="0.00"></div>
+        <div class="fg" style="width:100px"><label>Left</label><input type="number" step="0.01" id="d17-l" placeholder="0.00"></div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">D18</div>
+      <div class="qlabel">Uterine artery PI (if assessed)</div>
+      <div class="qinput" style="display:flex;gap:10px;flex-wrap:wrap">
+        <div class="fg" style="width:100px"><label>Right</label><input type="number" step="0.01" id="d18-r" placeholder="0.00"></div>
+        <div class="fg" style="width:100px"><label>Left</label><input type="number" step="0.01" id="d18-l" placeholder="0.00"></div>
+      </div>
+    </div>
+
+    <div class="qrow">
+      <div class="qno">D19</div>
+      <div class="qlabel">Overall impression</div>
+      <div class="qinput">
+        <div class="opts" id="d19">
+          <label class="opt-btn"><input type="radio" name="d19" value="Solitary fibroid">Solitary fibroid</label>
+          <label class="opt-btn"><input type="radio" name="d19" value="Multiple fibroids">Multiple fibroids</label>
+          <label class="opt-btn"><input type="radio" name="d19" value="Bulky fibroid uterus">Bulky fibroid uterus</label>
+          <label class="opt-btn"><input type="radio" name="d19" value="No fibroid detected">No fibroid detected</label>
+          <label class="opt-btn"><input type="radio" name="d19" value="Other finding">Other finding</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brow">
+    <button class="btn btnp" id="saveBtn" onclick="saveRec()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
+      Save questionnaire
+    </button>
+    <button class="btn" onclick="clearForm()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1018 0 9 9 0 00-18 0"/><path d="M9 12h6M12 9l3 3-3 3"/></svg>
+      Clear form
+    </button>
+  </div>
+  <div class="flash" id="fmsg"></div>
+</div>
+
+<!-- ══ RECORDS PAGE ══ -->
+<div class="page" id="page-records">
+  <div class="sgrid">
+    <div class="scard"><div class="slb">Total records</div><div class="sv ac" id="s-total">0</div></div>
+    <div class="scard"><div class="slb">Fibroids detected</div><div class="sv" id="s-fib">—</div></div>
+    <div class="scard"><div class="slb">Target (150)</div><div class="sv ac" id="s-tgt">0%</div></div>
+  </div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:1rem 1.25rem">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:1rem">
+      <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text2)">All questionnaire records</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn" onclick="fetchFromSheet()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1018 0 9 9 0 00-18 0"/><path d="M12 8l-4 4 4 4M16 12H8"/></svg>
+          Refresh from database
+        </button>
+        <button class="btn" onclick="exportCSV()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export CSV
+        </button>
+      </div>
+    </div>
+    <div class="flash" id="rmsg" style="margin-bottom:10px"></div>
+    <div class="rwrap">
+      <table class="rt">
+        <thead>
+          <tr>
+            <th>#</th><th>Patient ID</th><th>Centre</th><th>Age</th><th>Ethnic</th><th>Marital</th>
+            <th>Education</th><th>Parity</th><th>Contraception</th><th>AUB type</th>
+            <th>Duration</th><th>Fibroids</th><th>FIGO type(s)</th><th>Dominant location</th>
+            <th>Overall impression</th><th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="rbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+var API = 'PASTE_QUESTIONNAIRE_API_URL_HERE';
+var LOCAL_KEY = 'fibroid_q_v1';
+var QUEUE_KEY = 'fibroid_q_queue';
+var recs = [];
+var syncQueue = [];
+
+function loadLocal(){
+  try{var d=localStorage.getItem(LOCAL_KEY);if(d)recs=JSON.parse(d);}catch(e){recs=[];}
+  try{var q=localStorage.getItem(QUEUE_KEY);if(q)syncQueue=JSON.parse(q);}catch(e){syncQueue=[];}
+}
+function saveLocal(){
+  try{localStorage.setItem(LOCAL_KEY,JSON.stringify(recs));}catch(e){}
+  try{localStorage.setItem(QUEUE_KEY,JSON.stringify(syncQueue));}catch(e){}
+}
+
+function setSync(state,label){
+  document.getElementById('syncDot').className='sync-dot '+state;
+  document.getElementById('syncLabel').textContent=label;
+}
+function checkOnline(){
+  if(!navigator.onLine){document.getElementById('offlineBanner').classList.add('show');setSync('err','Offline');}
+  else{document.getElementById('offlineBanner').classList.remove('show');setSync('ok','Connected');flushQueue();}
+}
+window.addEventListener('online',checkOnline);
+window.addEventListener('offline',checkOnline);
+
+function addToQueue(rec){syncQueue.push(rec);saveLocal();}
+function flushQueue(){
+  if(!syncQueue.length||API.indexOf('PASTE')>-1)return;
+  var item=syncQueue[0];
+  sendToSheet(item,function(ok){if(ok){syncQueue.shift();saveLocal();flushQueue();}});
+}
+
+function sendToSheet(rec,cb){
+  if(API.indexOf('PASTE')>-1){if(cb)cb(false);return;}
+  setSync('spin','Saving...');
+  fetch(API,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(rec)})
+  .then(function(r){return r.json();})
+  .then(function(data){
+    if(data.status==='success'){setSync('ok','Saved');setTimeout(function(){setSync('ok','Connected');},3000);if(cb)cb(true);}
+    else{setSync('err','Sync error');if(cb)cb(false);}
+  })
+  .catch(function(){setSync('err','Offline');if(cb)cb(false);});
+}
+
+function fetchFromSheet(){
+  var rmsg=document.getElementById('rmsg');
+  if(API.indexOf('PASTE')>-1){rmsg.className='flash warn';rmsg.textContent='Database not yet connected. Please add the API URL first.';rmsg.style.display='block';return;}
+  rmsg.className='flash warn';rmsg.textContent='Fetching from database...';rmsg.style.display='block';
+  setSync('spin','Fetching...');
+  fetch(API+'?t='+Date.now())
+  .then(function(r){return r.json();})
+  .then(function(data){
+    if(data.status==='success'&&data.data&&data.data.length>1){
+      recs=data.data.slice(1).map(function(r){return{pid:r[0],centre:r[1],date:r[2],sono:r[3],a1:r[4],a2:r[5],a6:r[8],a4:r[7],b5:r[14],b6:r[15],c1:r[18],c6:r[23],d8:r[33],d14:r[40],d19:r[44],figoTypes:r[38]||''};});
+      saveLocal();renderRecs();updateStats();
+      setSync('ok','Connected');
+      rmsg.className='flash ok';rmsg.textContent='Refreshed. Total: '+recs.length+' records.';
+      setTimeout(function(){rmsg.style.display='none';},4000);
+    }else{setSync('ok','Connected');rmsg.className='flash warn';rmsg.textContent='No records found yet.';setTimeout(function(){rmsg.style.display='none';},3000);}
+  })
+  .catch(function(){setSync('err','Offline');rmsg.className='flash err';rmsg.textContent='Could not reach database.';setTimeout(function(){rmsg.style.display='none';},4000);});
+}
+
+// ── FIBROID TABLE ──
+function buildFibTable(){
+  var tb=document.getElementById('fibBody');tb.innerHTML='';
+  for(var i=1;i<=5;i++){
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td class="fib-no">'+i+'</td>'
+      +'<td><div style="display:flex;gap:3px;align-items:center"><input type="number" step="0.1" class="fib-input" id="fib'+i+'-l" placeholder="L" style="width:44px"><span style="font-size:10px;color:var(--text3)">×</span><input type="number" step="0.1" class="fib-input" id="fib'+i+'-w" placeholder="W" style="width:44px"><span style="font-size:10px;color:var(--text3)">×</span><input type="number" step="0.1" class="fib-input" id="fib'+i+'-ap" placeholder="AP" style="width:44px"></div></td>'
+      +'<td><select class="fib-select" id="fib'+i+'-figo"><option value="">—</option><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select></td>'
+      +'<td><select class="fib-select" id="fib'+i+'-loc"><option value="">—</option><option>Anterior</option><option>Posterior</option><option>Fundal</option><option>Lat. wall</option><option>Cervical</option></select></td>'
+      +'<td><select class="fib-select" id="fib'+i+'-echo"><option value="">—</option><option>Hypoechoic</option><option>Isoechoic</option><option>Hyperechoic</option><option>Heterogeneous</option><option>Mixed</option></select></td>'
+      +'<td><select class="fib-select" id="fib'+i+'-deg"><option value="">—</option><option>None</option><option>Hyaline</option><option>Cystic</option><option>Calcific</option><option>Mixed</option><option>Sarcomatous (susp.)</option></select></td>'
+      +'<td><select class="fib-select" id="fib'+i+'-dop"><option value="">—</option><option>Peripheral</option><option>Internal</option><option>Absent</option></select></td>';
+    tb.appendChild(tr);
+  }
+}
+
+function toggleFibroids(val){
+  document.getElementById('fibroid-section').style.display=val==='Yes'?'block':'none';
+}
+
+function toggleIrreg(){
+  var cb=document.getElementById('b2-irreg');
+  var inp=document.getElementById('b2-days');
+  inp.disabled=cb.checked;
+  if(cb.checked)inp.value='';
+}
+
+function calcVolume(){
+  var l=parseFloat(document.getElementById('d3-l').value)||0;
+  var w=parseFloat(document.getElementById('d3-w').value)||0;
+  var ap=parseFloat(document.getElementById('d3-ap').value)||0;
+  var vol=l&&w&&ap?(0.523*l*w*ap).toFixed(1):'';
+  document.getElementById('d4-vol').value=vol?vol+' mL':'';
+}
+document.getElementById('d3-l').oninput=calcVolume;
+document.getElementById('d3-w').oninput=calcVolume;
+
+function radio(name){var el=document.querySelector('input[name="'+name+'"]:checked');return el?el.value:'';}
+
+function getFibroids(){
+  var arr=[];
+  for(var i=1;i<=5;i++){
+    var l=document.getElementById('fib'+i+'-l').value;
+    var w=document.getElementById('fib'+i+'-w').value;
+    var ap=document.getElementById('fib'+i+'-ap').value;
+    if(l||w||ap){
+      arr.push({
+        n:i,size:(l||'?')+'x'+(w||'?')+'x'+(ap||'?'),
+        figo:document.getElementById('fib'+i+'-figo').value,
+        loc:document.getElementById('fib'+i+'-loc').value,
+        echo:document.getElementById('fib'+i+'-echo').value,
+        deg:document.getElementById('fib'+i+'-deg').value,
+        dop:document.getElementById('fib'+i+'-dop').value
+      });
+    }
+  }
+  return arr;
+}
+
+function flash(id,msg,type){
+  var el=document.getElementById(id);el.textContent=msg;el.className='flash '+type;el.style.display='block';
+  setTimeout(function(){el.style.display='none';},5000);
+}
+
+function saveRec(){
+  var pid=document.getElementById('m-pid').value.trim();
+  var centre=document.getElementById('m-centre').value;
+  if(!pid||!centre){flash('fmsg','Participant Code and Study Centre are required.','err');return;}
+  var fibs=getFibroids();
+  var figoList=fibs.map(function(f){return 'F'+f.n+':'+f.figo;}).join('; ');
+  var rec={
+    pid:pid, centre:centre,
+    date:document.getElementById('m-date').value||new Date().toISOString().split('T')[0],
+    sono:document.getElementById('m-sono').value,
+    a1:document.getElementById('a1').value, a2:radio('a2'), a3:radio('a3'),
+    a4:radio('a4'), a5:radio('a5'), a6:radio('a6'), a7:radio('a7'),
+    b1:document.getElementById('b1').value,
+    b2:document.getElementById('b2-irreg').checked?'Irregular':document.getElementById('b2-days').value,
+    b3:document.getElementById('b3').value,
+    b4:document.getElementById('b4').value, b5:document.getElementById('b5').value,
+    b6:radio('b6'), b7:radio('b7'), b8:radio('b8'),
+    b9:radio('b9'), b9spec:document.getElementById('b9-spec').value,
+    b10:radio('b10'),
+    c1:radio('c1'), c2:document.getElementById('c2').value,
+    c3:radio('c3'), c4:radio('c4'), c5:radio('c5'), c6:radio('c6'),
+    c7:radio('c7'), c8:radio('c8'), c9:radio('c9'), c10:radio('c10'),
+    c11:radio('c11'), c11spec:document.getElementById('c11-spec').value,
+    d1:radio('d1'), d2:radio('d2'),
+    d3:document.getElementById('d3-l').value+'x'+document.getElementById('d3-w').value+'x'+document.getElementById('d3-ap').value,
+    d4:document.getElementById('d4-vol').value,
+    d5:radio('d5'), d6:document.getElementById('d6').value,
+    d7:radio('d7'), d8:radio('d8'), d9:radio('d9'),
+    fibroids:JSON.stringify(fibs), figoTypes:figoList,
+    d11:radio('d11'), d12:radio('d12'),
+    d13:document.getElementById('d13').value, d14:radio('d14'),
+    d15:radio('d15'), d16:radio('d16'),
+    d17r:document.getElementById('d17-r').value, d17l:document.getElementById('d17-l').value,
+    d18r:document.getElementById('d18-r').value, d18l:document.getElementById('d18-l').value,
+    d19:radio('d19')
+  };
+  recs.push(rec);saveLocal();renderRecs();updateStats();
+  var btn=document.getElementById('saveBtn');btn.disabled=true;btn.textContent='Saving...';
+  if(navigator.onLine&&API.indexOf('PASTE')===-1){
+    sendToSheet(rec,function(ok){
+      btn.disabled=false;btn.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg> Save questionnaire';
+      if(ok)flash('fmsg','Saved to central database — Patient ID: '+pid,'ok');
+      else{addToQueue(rec);flash('fmsg','Saved locally. Will sync when online.','warn');}
+    });
+  } else {
+    if(API.indexOf('PASTE')>-1)flash('fmsg','Saved locally. Connect database API to enable central sync.','warn');
+    else{addToQueue(rec);flash('fmsg','Saved locally (offline). Will sync automatically when online.','warn');}
+    btn.disabled=false;btn.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg> Save questionnaire';
+  }
+}
+
+function clearForm(){
+  document.querySelectorAll('#page-form input[type=text],#page-form input[type=number],#page-form input[type=date]').forEach(function(el){el.value='';});
+  document.querySelectorAll('#page-form input[type=radio],#page-form input[type=checkbox]').forEach(function(el){el.checked=false;});
+  document.querySelectorAll('#page-form select').forEach(function(el){el.value='';});
+  document.querySelectorAll('.opt-btn').forEach(function(el){el.classList.remove('sel');});
+  document.getElementById('d4-vol').value='';
+  document.getElementById('fibroid-section').style.display='none';
+  document.getElementById('m-date').value=new Date().toISOString().split('T')[0];
+}
+
+function renderRecs(){
+  var tb=document.getElementById('rbody');
+  document.getElementById('tabCount').textContent=recs.length;
+  document.getElementById('hdrCount').textContent=recs.length+' / 150 cases';
+  if(!recs.length){tb.innerHTML='<tr><td colspan="16"><div class="empty"><p>No records yet. Complete a questionnaire and save it.</p></div></td></tr>';return;}
+  tb.innerHTML=recs.map(function(r,i){
+    return '<tr><td class="mc" style="color:var(--text3)">'+(i+1)+'</td>'
+      +'<td class="mc" style="font-weight:500">'+(r.pid||'—')+'</td>'
+      +'<td style="font-size:11px">'+(r.centre||'—')+'</td>'
+      +'<td class="mc">'+(r.a1||'—')+'</td>'
+      +'<td>'+(r.a2||'—')+'</td>'
+      +'<td>'+(r.a6||'—')+'</td>'
+      +'<td>'+(r.a4||'—')+'</td>'
+      +'<td class="mc">'+(r.b5!==undefined&&r.b5!==''?r.b5:'—')+'</td>'
+      +'<td>'+(r.b6||'—')+'</td>'
+      +'<td style="font-size:11px">'+(r.c1||'—')+'</td>'
+      +'<td>'+(r.c6||'—')+'</td>'
+      +'<td>'+(r.d8||'—')+'</td>'
+      +'<td style="font-size:11px">'+(r.figoTypes||'—')+'</td>'
+      +'<td style="font-size:11px">'+(r.d14||'—')+'</td>'
+      +'<td style="font-size:11px">'+(r.d19||'—')+'</td>'
+      +'<td class="mc" style="font-size:11px;color:var(--text2)">'+(r.date||'—')+'</td>'
+      +'</tr>';
+  }).join('');
+}
+
+function updateStats(){
+  var n=recs.length;
+  var fib=recs.filter(function(r){return r.d8==='Yes';}).length;
+  document.getElementById('s-total').textContent=n;
+  document.getElementById('s-fib').textContent=n?fib+' ('+Math.round(fib/n*100)+'%)':'—';
+  document.getElementById('s-tgt').textContent=Math.min(Math.round(n/150*100),100)+'%';
+}
+
+function exportCSV(){
+  if(!recs.length){alert('No records to export.');return;}
+  var keys=['pid','centre','date','sono','a1','a2','a3','a4','a5','a6','a7','b1','b2','b3','b4','b5','b6','b7','b8','b9','b9spec','b10','c1','c2','c3','c4','c5','c6','c7','c8','c9','c10','c11','c11spec','d1','d2','d3','d4','d5','d6','d7','d8','d9','figoTypes','d11','d12','d13','d14','d15','d16','d17r','d17l','d18r','d18l','d19'];
+  var hdr=keys.join(',');
+  var rows=recs.map(function(r){return keys.map(function(k){var v=r[k]!==undefined?r[k]:'';return'"'+String(v).replace(/"/g,'""')+'"';}).join(',');});
+  var csv=[hdr].concat(rows).join('\n');
+  var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download='fibroid_questionnaire_'+new Date().toISOString().split('T')[0]+'.csv';a.click();URL.revokeObjectURL(url);
+}
+
+function showPage(name,btn){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on');});
+  document.getElementById('page-'+name).classList.add('on');btn.classList.add('on');
+  if(name==='records'){renderRecs();updateStats();}
+}
+
+// OPT BTN SELECTION HIGHLIGHT
+document.addEventListener('change',function(e){
+  if(e.target.type==='radio'){
+    var name=e.target.name;
+    document.querySelectorAll('input[name="'+name+'"]').forEach(function(inp){
+      inp.closest('.opt-btn').classList.remove('sel');
+    });
+    e.target.closest('.opt-btn').classList.add('sel');
+  }
+  if(e.target.type==='checkbox'&&e.target.closest('.opt-btn')){
+    e.target.closest('.opt-btn').classList.toggle('sel',e.target.checked);
+  }
+});
+
+buildFibTable();
+document.getElementById('fibroid-section').style.display='none';
+document.getElementById('m-date').value=new Date().toISOString().split('T')[0];
+loadLocal();renderRecs();updateStats();checkOnline();
+</script>
+</body>
+</html>
