@@ -123,9 +123,85 @@ table.rt tbody tr:hover td{background:var(--bg)}
   header{padding:0 1rem}main{padding:1rem}.tabs{padding:0 1rem}
   .hdr-badge{display:none}.qrow{flex-direction:column;gap:6px}.qinput{min-width:100%;max-width:100%}
 }
+
+/* CONSENT MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(10,10,10,.55);z-index:999;display:flex;align-items:center;justify-content:center;padding:1rem}
+.modal-box{background:var(--surface);border-radius:var(--rl);max-width:640px;width:100%;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.modal-head{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.modal-head-icon{width:36px;height:36px;background:var(--accent-l);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.modal-head-icon svg{width:18px;height:18px;color:var(--accent)}
+.modal-title{font-size:15px;font-weight:600;color:var(--text)}
+.modal-subtitle{font-size:12px;color:var(--text2)}
+.modal-body{padding:1.25rem 1.5rem;overflow-y:auto;flex:1}
+.modal-body h4{font-size:13px;font-weight:600;color:var(--accent-t);margin:1rem 0 4px}
+.modal-body h4:first-child{margin-top:0}
+.modal-body p,.modal-body li{font-size:12px;color:var(--text2);line-height:1.8}
+.modal-body ul{padding-left:1.2rem;margin-bottom:6px}
+.modal-body li{margin-bottom:2px}
+.modal-footer{padding:1rem 1.5rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:10px}
+.consent-check{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--text);cursor:pointer}
+.consent-check input{margin-top:3px;accent-color:var(--accent);width:15px;height:15px;flex-shrink:0}
+.consent-btns{display:flex;gap:8px;justify-content:flex-end}
+.modal-decline{font-family:var(--sans);font-size:13px;font-weight:500;padding:9px 18px;border-radius:var(--r);cursor:pointer;border:1px solid var(--border2);background:var(--surface);color:var(--text2)}
+.modal-agree{font-family:var(--sans);font-size:13px;font-weight:500;padding:9px 20px;border-radius:var(--r);cursor:pointer;border:none;background:var(--accent);color:#fff}
+.modal-agree:disabled{opacity:.4;cursor:not-allowed}
 </style>
 </head>
 <body>
+
+<!-- ══ INFORMED CONSENT MODAL ══ -->
+<div class="modal-overlay" id="consentModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-head-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--accent)"><path d="M9 12l2 2 4-4"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <div>
+        <div class="modal-title">Informed Consent</div>
+        <div class="modal-subtitle">Please read carefully before proceeding</div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <h4>Study title</h4>
+      <p>Sonographic characterisation of uterine fibroids and its relationship with the quantitative severity of abnormal uterine bleeding among women in Ibadan, Nigeria.</p>
+
+      <h4>Principal investigator</h4>
+      <p>Olaoye — BSc, MSc (Anatomy), PGD Ultrasonography (RRBN)<br>Department of Radiology and Imaging Sciences, Molly Specialist Hospital, Ibadan.</p>
+
+      <h4>Purpose of this study</h4>
+      <p>You are being invited to take part in a research study that aims to understand the relationship between the ultrasound features of uterine fibroids and the severity of abnormal menstrual bleeding. Your participation will help improve the management of women with fibroids in our setting.</p>
+
+      <h4>What your participation involves</h4>
+      <ul>
+        <li>Completing this questionnaire about your menstrual and medical history (approximately 10–15 minutes).</li>
+        <li>Undergoing a pelvic ultrasound scan as part of your routine care.</li>
+        <li>Completing a pictorial blood assessment chart (PBAC) during your next menstrual cycle.</li>
+      </ul>
+
+      <h4>Confidentiality</h4>
+      <p>All information you provide is strictly confidential. Your name will not appear on any research document. You will be identified only by a participant code. Data will be stored securely and accessible only to the research team.</p>
+
+      <h4>Voluntary participation</h4>
+      <p>Your participation is entirely voluntary. You may withdraw at any time without any effect on the care you receive at this facility.</p>
+
+      <h4>Benefits and risks</h4>
+      <p>There are no direct risks to you from participating. The findings from this study may benefit future patients with similar conditions.</p>
+
+      <h4>Contact</h4>
+      <p>If you have any questions about this study, please speak with the sonographer or attending clinician before proceeding.</p>
+    </div>
+    <div class="modal-footer">
+      <label class="consent-check">
+        <input type="checkbox" id="consentCheck" onchange="toggleAgree()">
+        <span>I have read and understood the information above. I voluntarily agree to participate in this study and consent to the use of my anonymised data for research purposes.</span>
+      </label>
+      <div class="consent-btns">
+        <button class="modal-decline" onclick="declineConsent()">I do not agree</button>
+        <button class="modal-agree" id="agreeBtn" onclick="acceptConsent()" disabled>I agree — proceed</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <header>
   <div class="logo">
@@ -396,13 +472,13 @@ table.rt tbody tr:hover td{background:var(--bg)}
       <div class="qno">C1</div>
       <div class="qlabel">Which of the following best describes your main bleeding concern?</div>
       <div class="qinput">
+        <div style="font-size:11px;color:var(--accent-t);margin-bottom:4px;font-style:italic">Select all that apply</div>
         <div class="opts" id="c1">
-          <label class="opt-btn"><input type="radio" name="c1" value="Bleeding too heavy">Bleeding too heavy</label>
-          <label class="opt-btn"><input type="radio" name="c1" value="Bleeding lasts too long">Lasts too long</label>
-          <label class="opt-btn"><input type="radio" name="c1" value="Bleeding at irregular times">Irregular times</label>
-          <label class="opt-btn"><input type="radio" name="c1" value="Bleeding between periods">Between periods</label>
-          <label class="opt-btn"><input type="radio" name="c1" value="Bleeding after sex">After sex</label>
-          <label class="opt-btn"><input type="radio" name="c1" value="More than one of the above">More than one</label>
+          <label class="opt-btn"><input type="checkbox" name="c1" value="Bleeding too heavy">Bleeding too heavy</label>
+          <label class="opt-btn"><input type="checkbox" name="c1" value="Bleeding lasts too long">Lasts too long</label>
+          <label class="opt-btn"><input type="checkbox" name="c1" value="Bleeding at irregular times">Irregular times</label>
+          <label class="opt-btn"><input type="checkbox" name="c1" value="Bleeding between periods">Between periods</label>
+          <label class="opt-btn"><input type="checkbox" name="c1" value="Bleeding after sex">After sex</label>
         </div>
       </div>
     </div>
@@ -498,12 +574,14 @@ table.rt tbody tr:hover td{background:var(--bg)}
       <div class="qno">C9</div>
       <div class="qlabel">Do you experience pelvic pressure, heaviness, or urinary frequency between periods?</div>
       <div class="qinput">
+        <div style="font-size:11px;color:var(--accent-t);margin-bottom:4px;font-style:italic">Select all that apply</div>
         <div class="opts" id="c9">
-          <label class="opt-btn"><input type="radio" name="c9" value="No">No</label>
-          <label class="opt-btn"><input type="radio" name="c9" value="Pelvic pressure/heaviness">Pelvic pressure/heaviness</label>
-          <label class="opt-btn"><input type="radio" name="c9" value="Urinary frequency">Urinary frequency</label>
-          <label class="opt-btn"><input type="radio" name="c9" value="Both">Both</label>
-          <label class="opt-btn"><input type="radio" name="c9" value="Other">Other</label>
+          <label class="opt-btn"><input type="checkbox" name="c9" value="No">No</label>
+          <label class="opt-btn"><input type="checkbox" name="c9" value="Pelvic pressure/heaviness">Pelvic pressure/heaviness</label>
+          <label class="opt-btn"><input type="checkbox" name="c9" value="Urinary frequency">Urinary frequency</label>
+          <label class="opt-btn"><input type="checkbox" name="c9" value="Constipation">Constipation</label>
+          <label class="opt-btn"><input type="checkbox" name="c9" value="Abdominal bloating">Abdominal bloating</label>
+          <label class="opt-btn"><input type="checkbox" name="c9" value="Other">Other</label>
         </div>
       </div>
     </div>
@@ -525,12 +603,14 @@ table.rt tbody tr:hover td{background:var(--bg)}
       <div class="qno">C11</div>
       <div class="qlabel">Have you previously received any treatment for this bleeding problem?</div>
       <div class="qinput">
+        <div style="font-size:11px;color:var(--accent-t);margin-bottom:4px;font-style:italic">Select all that apply</div>
         <div class="opts" id="c11">
-          <label class="opt-btn"><input type="radio" name="c11" value="No treatment">No treatment</label>
-          <label class="opt-btn"><input type="radio" name="c11" value="Medications">Medications</label>
-          <label class="opt-btn"><input type="radio" name="c11" value="Surgery: Myomectomy">Myomectomy</label>
-          <label class="opt-btn"><input type="radio" name="c11" value="Surgery: Hysterectomy">Hysterectomy</label>
-          <label class="opt-btn"><input type="radio" name="c11" value="Other">Other</label>
+          <label class="opt-btn"><input type="checkbox" name="c11" value="No treatment">No treatment</label>
+          <label class="opt-btn"><input type="checkbox" name="c11" value="Medications">Medications</label>
+          <label class="opt-btn"><input type="checkbox" name="c11" value="Surgery: Myomectomy">Myomectomy</label>
+          <label class="opt-btn"><input type="checkbox" name="c11" value="Surgery: Hysterectomy">Hysterectomy</label>
+          <label class="opt-btn"><input type="checkbox" name="c11" value="UAE">UAE</label>
+          <label class="opt-btn"><input type="checkbox" name="c11" value="Other">Other</label>
         </div>
         <input type="text" id="c11-spec" placeholder="If medications, specify..." style="margin-top:6px;font-size:12px;width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:var(--r);background:var(--bg);color:var(--text);outline:none">
       </div>
@@ -592,11 +672,13 @@ table.rt tbody tr:hover td{background:var(--bg)}
       <div class="qno">D5</div>
       <div class="qlabel">Myometrial echotexture</div>
       <div class="qinput">
+        <div style="font-size:11px;color:var(--accent-t);margin-bottom:4px;font-style:italic">Select all that apply</div>
         <div class="opts" id="d5">
-          <label class="opt-btn"><input type="radio" name="d5" value="Homogeneous">Homogeneous</label>
-          <label class="opt-btn"><input type="radio" name="d5" value="Heterogeneous">Heterogeneous</label>
-          <label class="opt-btn"><input type="radio" name="d5" value="Lobulated contour">Lobulated contour</label>
-          <label class="opt-btn"><input type="radio" name="d5" value="Bulky">Bulky</label>
+          <label class="opt-btn"><input type="checkbox" name="d5" value="Homogeneous">Homogeneous</label>
+          <label class="opt-btn"><input type="checkbox" name="d5" value="Heterogeneous">Heterogeneous</label>
+          <label class="opt-btn"><input type="checkbox" name="d5" value="Lobulated contour">Lobulated contour</label>
+          <label class="opt-btn"><input type="checkbox" name="d5" value="Bulky">Bulky</label>
+          <label class="opt-btn"><input type="checkbox" name="d5" value="Calcifications">Calcifications</label>
         </div>
       </div>
     </div>
@@ -611,12 +693,14 @@ table.rt tbody tr:hover td{background:var(--bg)}
       <div class="qno">D7</div>
       <div class="qlabel">Endometrial appearance</div>
       <div class="qinput">
+        <div style="font-size:11px;color:var(--accent-t);margin-bottom:4px;font-style:italic">Select all that apply</div>
         <div class="opts" id="d7">
-          <label class="opt-btn"><input type="radio" name="d7" value="Normal">Normal</label>
-          <label class="opt-btn"><input type="radio" name="d7" value="Thickened">Thickened</label>
-          <label class="opt-btn"><input type="radio" name="d7" value="Distorted/Compressed">Distorted/Compressed</label>
-          <label class="opt-btn"><input type="radio" name="d7" value="Displaced">Displaced</label>
-          <label class="opt-btn"><input type="radio" name="d7" value="Other">Other</label>
+          <label class="opt-btn"><input type="checkbox" name="d7" value="Normal">Normal</label>
+          <label class="opt-btn"><input type="checkbox" name="d7" value="Thickened">Thickened</label>
+          <label class="opt-btn"><input type="checkbox" name="d7" value="Distorted/Compressed">Distorted/Compressed</label>
+          <label class="opt-btn"><input type="checkbox" name="d7" value="Displaced">Displaced</label>
+          <label class="opt-btn"><input type="checkbox" name="d7" value="Not visualised">Not visualised</label>
+          <label class="opt-btn"><input type="checkbox" name="d7" value="Other">Other</label>
         </div>
       </div>
     </div>
@@ -717,10 +801,13 @@ table.rt tbody tr:hover td{background:var(--bg)}
       <div class="qno">D15</div>
       <div class="qlabel">Adnexal findings</div>
       <div class="qinput">
+        <div style="font-size:11px;color:var(--accent-t);margin-bottom:4px;font-style:italic">Select all that apply</div>
         <div class="opts" id="d15">
-          <label class="opt-btn"><input type="radio" name="d15" value="Normal">Normal</label>
-          <label class="opt-btn"><input type="radio" name="d15" value="Ovarian cyst">Ovarian cyst</label>
-          <label class="opt-btn"><input type="radio" name="d15" value="Other">Other</label>
+          <label class="opt-btn"><input type="checkbox" name="d15" value="Normal">Normal</label>
+          <label class="opt-btn"><input type="checkbox" name="d15" value="Ovarian cyst">Ovarian cyst</label>
+          <label class="opt-btn"><input type="checkbox" name="d15" value="Hydrosalpinx">Hydrosalpinx</label>
+          <label class="opt-btn"><input type="checkbox" name="d15" value="Endometrioma">Endometrioma</label>
+          <label class="opt-btn"><input type="checkbox" name="d15" value="Other">Other</label>
         </div>
       </div>
     </div>
@@ -825,7 +912,7 @@ table.rt tbody tr:hover td{background:var(--bg)}
 </main>
 
 <script>
-var API = 'https://script.google.com/macros/s/AKfycbw13vN7KJkYUfxoKfYW3FX6gJj7iBhryIXhRj-j-z4d4LpoLX6nZUt_Pw5NDInFD4E/exec';
+var API='https://script.google.com/macros/s/AKfycbw13vN7KJkYUfxoKfYW3FX6gJj7iBhryIXhRj-j-z4d4LpoLX6nZUt_Pw5NDInFD4E/exec';
 var LOCAL_KEY = 'fibroid_q_v1';
 var QUEUE_KEY = 'fibroid_q_queue';
 var recs = [];
@@ -927,6 +1014,16 @@ document.getElementById('d3-l').oninput=calcVolume;
 document.getElementById('d3-w').oninput=calcVolume;
 
 function radio(name){var el=document.querySelector('input[name="'+name+'"]:checked');return el?el.value:'';}
+function multi(name){var els=document.querySelectorAll('input[name="'+name+'"]:checked');return Array.from(els).map(function(e){return e.value;}).join('; ');}
+
+// ── CONSENT ──
+function toggleAgree(){document.getElementById('agreeBtn').disabled=!document.getElementById('consentCheck').checked;}
+function acceptConsent(){document.getElementById('consentModal').style.display='none';}
+function declineConsent(){
+  if(confirm('You have chosen not to participate. This page will not be accessible. Click OK to confirm.')){
+    document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:sans-serif;color:#6B6760;text-align:center;padding:2rem"><div><p style="font-size:14px">Thank you. You have chosen not to participate in this study.</p><p style="font-size:13px;margin-top:8px">You may close this page.</p></div></div>';
+  }
+}
 
 function getFibroids(){
   var arr=[];
@@ -972,19 +1069,19 @@ function saveRec(){
     b6:radio('b6'), b7:radio('b7'), b8:radio('b8'),
     b9:radio('b9'), b9spec:document.getElementById('b9-spec').value,
     b10:radio('b10'),
-    c1:radio('c1'), c2:document.getElementById('c2').value,
+    c1:multi('c1'), c2:document.getElementById('c2').value,
     c3:radio('c3'), c4:radio('c4'), c5:radio('c5'), c6:radio('c6'),
-    c7:radio('c7'), c8:radio('c8'), c9:radio('c9'), c10:radio('c10'),
-    c11:radio('c11'), c11spec:document.getElementById('c11-spec').value,
+    c7:radio('c7'), c8:radio('c8'), c9:multi('c9'), c10:radio('c10'),
+    c11:multi('c11'), c11spec:document.getElementById('c11-spec').value,
     d1:radio('d1'), d2:radio('d2'),
     d3:document.getElementById('d3-l').value+'x'+document.getElementById('d3-w').value+'x'+document.getElementById('d3-ap').value,
     d4:document.getElementById('d4-vol').value,
-    d5:radio('d5'), d6:document.getElementById('d6').value,
-    d7:radio('d7'), d8:radio('d8'), d9:radio('d9'),
+    d5:multi('d5'), d6:document.getElementById('d6').value,
+    d7:multi('d7'), d8:radio('d8'), d9:radio('d9'),
     fibroids:JSON.stringify(fibs), figoTypes:figoList,
     d11:radio('d11'), d12:radio('d12'),
     d13:document.getElementById('d13').value, d14:radio('d14'),
-    d15:radio('d15'), d16:radio('d16'),
+    d15:multi('d15'), d16:radio('d16'),
     d17r:document.getElementById('d17-r').value, d17l:document.getElementById('d17-l').value,
     d18r:document.getElementById('d18-r').value, d18l:document.getElementById('d18-l').value,
     d19:radio('d19')
