@@ -218,7 +218,7 @@ table.rt tbody tr:hover td{background:var(--bg)}
       <span class="sync-dot" id="syncDot"></span>
       <span id="syncLabel">Connecting...</span>
     </span>
-    <span class="hdr-badge" id="hdrCount">0 / 150 cases</span>
+    <span class="hdr-badge" id="hdrCount">0 / 155 cases</span>
   </div>
 </header>
 
@@ -886,7 +886,7 @@ table.rt tbody tr:hover td{background:var(--bg)}
   <div class="sgrid">
     <div class="scard"><div class="slb">Total records</div><div class="sv ac" id="s-total">0</div></div>
     <div class="scard"><div class="slb">Fibroids detected</div><div class="sv" id="s-fib">—</div></div>
-    <div class="scard"><div class="slb">Target (150)</div><div class="sv ac" id="s-tgt">0%</div></div>
+    <div class="scard"><div class="slb">Target (155)</div><div class="sv ac" id="s-tgt">0%</div></div>
   </div>
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:1rem 1.25rem">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:1rem">
@@ -1133,7 +1133,7 @@ function clearForm(){
 function renderRecs(){
   var tb=document.getElementById('rbody');
   document.getElementById('tabCount').textContent=recs.length;
-  document.getElementById('hdrCount').textContent=recs.length+' / 150 cases';
+  document.getElementById('hdrCount').textContent=recs.length+' / 155 cases';
   if(!recs.length){tb.innerHTML='<tr><td colspan="16"><div class="empty"><p>No records yet. Complete a questionnaire and save it.</p></div></td></tr>';return;}
   tb.innerHTML=recs.map(function(r,i){
     return '<tr><td class="mc" style="color:var(--text3)">'+(i+1)+'</td>'
@@ -1161,7 +1161,7 @@ function updateStats(){
   var fib=recs.filter(function(r){return r.d8==='Yes';}).length;
   document.getElementById('s-total').textContent=n;
   document.getElementById('s-fib').textContent=n?fib+' ('+Math.round(fib/n*100)+'%)':'—';
-  document.getElementById('s-tgt').textContent=Math.min(Math.round(n/150*100),100)+'%';
+  document.getElementById('s-tgt').textContent=Math.min(Math.round(n/155*100),100)+'%';
 }
 
 function exportCSV(){
